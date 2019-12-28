@@ -18,6 +18,6 @@ class RetrofitBuilder {
     }
 
     companion object {
-        val BASE_URL = "https://api.github.com"
+        const val BASE_URL = "https://api.github.com"
     }
 }

@@ -1,8 +1,13 @@
 package com.example.githubapitest.modules
 
+import com.example.githubapitest.repository.usecases.GetUsers
 import com.example.githubapitest.view.viewmodel.MainActivityViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+
 val mainModule = module {
-    viewModel { MainActivityViewModel() }
+
+    single { GetUsers() }
+
+    viewModel { MainActivityViewModel(get()) }
 }

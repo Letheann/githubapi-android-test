@@ -1,6 +1,7 @@
 package com.example.githubapitest.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Users(
 
@@ -57,4 +58,4 @@ data class Users(
 
     @field:SerializedName("organizations_url")
     val organizationsUrl: String? = null
-)
+) : Serializable
