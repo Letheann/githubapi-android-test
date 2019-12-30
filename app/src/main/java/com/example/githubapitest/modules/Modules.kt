@@ -1,7 +1,7 @@
 package com.example.githubapitest.modules
 
 import com.example.githubapitest.repository.usecases.GetUsers
-import com.example.githubapitest.ui.viewmodel.MainActivityViewModel
+import com.example.githubapitest.viewmodel.MainActivityViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

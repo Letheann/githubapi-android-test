@@ -1,4 +1,4 @@
-package com.example.githubapitest.ui.viewmodel
+package com.example.githubapitest.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope

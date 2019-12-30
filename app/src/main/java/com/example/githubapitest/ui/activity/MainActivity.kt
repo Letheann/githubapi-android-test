@@ -1,20 +1,17 @@
 package com.example.githubapitest.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
 import com.example.githubapitest.model.Users
 import com.example.githubapitest.model.ViewEvents
 import com.example.githubapitest.ui.adapter.UsersAdapter
-import com.example.githubapitest.ui.viewmodel.MainActivityViewModel
+import com.example.githubapitest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -55,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     private fun initObservers() {
         model.viewState.observe(this, Observer {
             when (it) {
-                is ViewEvents.SucessGetUsers -> populateData(it.users)
+                is ViewEvents.SuccessGetUsers -> populateData(it.users)
             }
         })
     }

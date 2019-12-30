@@ -1,4 +1,4 @@
-package com.example.githubapitest.ui.viewmodel
+package com.example.githubapitest.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,12 +13,13 @@ class MainActivityViewModel(private val repo: GetUsers) : BaseViewModel() {
     private val state = MutableLiveData<ViewEvents>()
     val viewState: LiveData<ViewEvents> = state
     private var page = 2
+
     fun getUsers(since: String = "1") {
         launch {
             withContext(IO) {
                 try {
                     val response = repo.execute(since)
-                    state.postValue(ViewEvents.SucessGetUsers(response))
+                    state.postValue(ViewEvents.SuccessGetUsers(response))
                 } catch (exception: Exception) {
 
                 }
