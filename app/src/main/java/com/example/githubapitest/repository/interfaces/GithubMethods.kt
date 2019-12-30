@@ -6,7 +6,6 @@ import retrofit2.http.GET
 
 
 interface GithubMethods {
-
     @GET("/users")
     fun getUserList(): Call<List<Users>>
 }
