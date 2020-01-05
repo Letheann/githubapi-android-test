@@ -36,6 +36,14 @@ class MainActivity : AppCompatActivity() {
         initObservers()
         setupRecyclerView()
         setRecyclerViewScrollListener()
+        setRefreshLayoutListener()
+    }
+
+    private fun setRefreshLayoutListener() {
+        swipeRefresh.setOnRefreshListener {
+            list.clear()
+            model.getUsers()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -76,6 +84,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun populateData(users: List<Users>?) {
+        if (swipeRefresh.isRefreshing){
+            swipeRefresh.isRefreshing = false
+        }
         users?.let { list.addAll(it) }
         adater.setItem(list)
     }

@@ -35,6 +35,7 @@ dependencies {
 //appcompat
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 // koin
     implementation "org.koin:koin-android-architecture:0.9.3"
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
