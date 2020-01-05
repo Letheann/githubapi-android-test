@@ -6,8 +6,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
-import com.example.githubapitest.model.Users
 import com.example.githubapitest.model.ViewEvents
+import com.example.githubapitest.model.repos
 import com.example.githubapitest.ui.adapter.UsersAdapter
 import com.example.githubapitest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     private val model by viewModel<MainActivityViewModel>()
     private lateinit var adater: UsersAdapter
     private lateinit var scrollListener: RecyclerView.OnScrollListener
-    private val list = ArrayList<Users>()
-    private val layoutManager = GridLayoutManager(this, 2)
+    private val list = ArrayList<repos>()
+    private val layoutManager = GridLayoutManager(this, 1)
     private val lastVisibleItemPosition: Int
         get() = layoutManager.findLastVisibleItemPosition()
 
@@ -33,16 +33,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        setupToolbar()
         initObservers()
         setupRecyclerView()
         setRecyclerViewScrollListener()
         setRefreshLayoutListener()
+        setEditTextActionListener()
+    }
+
+    private fun setEditTextActionListener() {
+        
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Repositories"
     }
 
     private fun setRefreshLayoutListener() {
         swipeRefresh.setOnRefreshListener {
             list.clear()
-            model.getUsers()
+            model.getRepos()
         }
     }
 
@@ -66,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getUsers() {
-        model.getUsers()
+        model.getRepos()
     }
 
     private fun setRecyclerViewScrollListener() {
@@ -75,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                 super.onScrollStateChanged(recyclerView, newState)
                 val totalItemCount = recyclerView.layoutManager?.itemCount
                 if (totalItemCount == lastVisibleItemPosition + 1) {
-                    model.getUsers(model.incrementPage())
+                    model.getRepos(model.incrementPage())
                 }
             }
         }
@@ -83,11 +94,11 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun populateData(users: List<Users>?) {
+    private fun populateData(repos: List<repos>?) {
         if (swipeRefresh.isRefreshing){
             swipeRefresh.isRefreshing = false
         }
-        users?.let { list.addAll(it) }
+        repos?.let { list.addAll(it) }
         adater.setItem(list)
     }
 }

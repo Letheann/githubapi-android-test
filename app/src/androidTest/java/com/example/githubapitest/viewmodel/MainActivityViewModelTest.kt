@@ -1,6 +1,5 @@
 package com.example.githubapitest.viewmodel
 
-import com.example.githubapitest.model.Users
 import com.example.githubapitest.model.ViewEvents
 import com.example.githubapitest.repository.usecases.GetUsers
 import com.nhaarman.mockitokotlin2.doReturn
@@ -25,9 +24,9 @@ class MainActivityViewModelTest {
 
     @Test
     fun when_call_api_should_return_value() {
-        whenever(getUseCase.execute("2")) doReturn users
+        whenever(getUseCase.execute("Letheann","2")) doReturn users
 
-        viewmodel.getUsers()
+        viewmodel.getRepos()
 
         assertEquals(ViewEvents.SuccessGetUsers(users), viewmodel.viewState.value)
     }

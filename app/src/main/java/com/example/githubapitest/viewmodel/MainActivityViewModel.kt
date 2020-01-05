@@ -14,20 +14,20 @@ class MainActivityViewModel(private val repo: GetUsers) : BaseViewModel() {
     val viewState: LiveData<ViewEvents> = state
     private var page = 2
 
-    fun getUsers(since: String = "1") {
+    fun getRepos(since: String = "1", q: String = "android") {
         launch {
             withContext(IO) {
                 try {
-                    val response = repo.execute(since)
-                    state.postValue(ViewEvents.SuccessGetUsers(response))
+                    val response = repo.execute(q, since)
+                    state.postValue(ViewEvents.SuccessGetUsers(response?.items))
                 } catch (exception: Exception) {
-
+                    print(exception)
                 }
             }
         }
     }
 
     fun incrementPage(): String {
-        return "" + (page ++) + ""
+        return "" + (page++) + ""
     }
 }
