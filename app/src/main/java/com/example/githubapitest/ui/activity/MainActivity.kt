@@ -1,6 +1,11 @@
 package com.example.githubapitest.ui.activity
 
+import android.app.Activity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,7 +17,6 @@ import com.example.githubapitest.ui.adapter.UsersAdapter
 import com.example.githubapitest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +46,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setEditTextActionListener() {
-        
+        searchNsme.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                if (searchNsme.text.length > 3) {
+                    list.clear()
+                    model.getRepos("1", searchNsme.text.toString())
+                    swipeRefresh.isRefreshing = true
+                    closeKeyboard()
+                    return@OnKeyListener true
+                } else {
+                    closeKeyboard()
+                    Toast.makeText(this, "Pesquise com pelo menos 3 caracteres", Toast.LENGTH_SHORT).show()
+                    return@OnKeyListener false
+                }
+            }
+            false
+        })
+    }
+
+    private fun closeKeyboard(){
+        val imm = this@MainActivity.getSystemService(Activity.INPUT_METHOD_SERVICE)
+                as InputMethodManager
+        imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
     }
 
     private fun setupToolbar() {
@@ -53,14 +78,16 @@ class MainActivity : AppCompatActivity() {
     private fun setRefreshLayoutListener() {
         swipeRefresh.setOnRefreshListener {
             list.clear()
-            model.getRepos()
+            model.resetPage()
+            searchNsme.setText("")
+            model.getRepos("1")
         }
     }
 
     private fun setupRecyclerView() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager
-        adater = UsersAdapter()
+        adater = UsersAdapter(this)
         recyclerView.adapter = adater
     }
 
@@ -78,6 +105,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getUsers() {
         model.getRepos()
+        swipeRefresh.isRefreshing = true
     }
 
     private fun setRecyclerViewScrollListener() {
@@ -85,8 +113,16 @@ class MainActivity : AppCompatActivity() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 val totalItemCount = recyclerView.layoutManager?.itemCount
-                if (totalItemCount == lastVisibleItemPosition + 1) {
-                    model.getRepos(model.incrementPage())
+                if (totalItemCount != null) {
+                    if (totalItemCount > 15 && totalItemCount == lastVisibleItemPosition + 1) {
+                        swipeRefresh.isRefreshing = true
+                        if (searchNsme.text.length > 3) {
+                            model.getRepos(model.incrementPage(), searchNsme.text.toString())
+                        } else {
+                            model.getRepos(model.incrementPage())
+                        }
+
+                    }
                 }
             }
         }
@@ -95,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun populateData(repos: List<repos>?) {
-        if (swipeRefresh.isRefreshing){
+        if (swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }
         repos?.let { list.addAll(it) }

@@ -1,5 +1,6 @@
 package com.example.githubapitest.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubapitest.R
 import com.example.githubapitest.model.repos
+import com.example.githubapitest.ui.activity.DetailsActivity
+import com.example.githubapitest.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.users_layout.view.*
 
-class UsersAdapter :
+class UsersAdapter(private val mainActivity: MainActivity) :
     RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -26,7 +29,7 @@ class UsersAdapter :
         val user = reposList?.get(position)
 
         holder.itemView.userName.text = user?.name
-        holder.itemView.startValue.text = user?.stargazersCount.toString()
+        holder.itemView.starValue.text = user?.stargazersCount.toString()
         holder.itemView.followersValue.text = user?.watchersCount.toString()
         holder.itemView.forksValue.text = user?.forksCount.toString()
         holder.itemView.DataValue.text = user?.createdAt
@@ -36,6 +39,12 @@ class UsersAdapter :
         Glide.with(context)
             .load(user?.owner?.avatarUrl)
             .into(holder.itemView.profileImage)
+
+        holder.itemView.cardItem.setOnClickListener {
+            val intent = Intent(mainActivity, DetailsActivity::class.java)
+            intent.putExtra("repos", user)
+            mainActivity.startActivity(intent)
+        }
 
     }
 

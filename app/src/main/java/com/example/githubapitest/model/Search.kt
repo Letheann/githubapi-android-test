@@ -1,6 +1,7 @@
 package com.example.githubapitest.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class Search(
@@ -13,4 +14,4 @@ data class Search(
 
 	@field:SerializedName("items")
 	val items: List<repos>? = null
-)
+): Serializable

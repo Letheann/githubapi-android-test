@@ -2,6 +2,7 @@ package com.example.githubapitest.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class License(
@@ -20,4 +21,4 @@ data class License(
 
 	@field:SerializedName("node_id")
 	val nodeId: String? = null
-)
+): Serializable

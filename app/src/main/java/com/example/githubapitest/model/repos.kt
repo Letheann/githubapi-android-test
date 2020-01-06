@@ -2,6 +2,7 @@ package com.example.githubapitest.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class repos(
@@ -230,4 +231,4 @@ data class repos(
 
 	@field:SerializedName("forks_count")
 	val forksCount: Int? = null
-)
+) : Serializable
