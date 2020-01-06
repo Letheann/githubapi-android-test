@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">GithubApiTest</string>
+    <string name="dias">%1$s Dias</string>
+    <string name="user_repo">User repo</string>
+    <string name="total_de_estrelas">Total de estrelas</string>
+    <string name="_5000">5000</string>
+    <string name="forks">Forks</string>
+    <string name="watchers">Watchers</string>
+    <string name="open_issues">Open Issues</string>
+    <string name="score">Score</string>
+    <string name="data">Data</string>
+    <string name="seguidores">Seguidores</string>
+    <string name="ordem">Ordem</string>
+    <string name="asc">Asc</string>
+    <string name="desc">Desc</string>
+    <string name="filtros">Filtros</string>
+    <string name="stars">Stars</string>
+    <string name="updatedbutton">Updated</string>
+    <string name="aplicar_filtros">Aplicar Filtros</string>
 </resources>

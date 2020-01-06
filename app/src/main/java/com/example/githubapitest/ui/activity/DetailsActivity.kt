@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.githubapitest.R
-import com.example.githubapitest.model.repos
+import com.example.githubapitest.model.Repos
 import com.example.githubapitest.viewmodel.DetailsViewModel
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.users_layout.profileImage
@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DetailsActivity : AppCompatActivity() {
 
     private val model by viewModel<DetailsViewModel>()
-    private lateinit var repos: repos
+    private lateinit var repos: Repos
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)

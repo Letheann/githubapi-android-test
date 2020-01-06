@@ -13,5 +13,5 @@ data class Search(
 	val incompleteResults: Boolean? = null,
 
 	@field:SerializedName("items")
-	val items: List<repos>? = null
+	val items: List<Repos>? = null
 ): Serializable

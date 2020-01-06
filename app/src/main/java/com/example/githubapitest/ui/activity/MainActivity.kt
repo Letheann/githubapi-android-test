@@ -1,8 +1,11 @@
 package com.example.githubapitest.ui.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -11,8 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
+import com.example.githubapitest.model.FilterParameters
 import com.example.githubapitest.model.ViewEvents
-import com.example.githubapitest.model.repos
+import com.example.githubapitest.model.Repos
 import com.example.githubapitest.ui.adapter.UsersAdapter
 import com.example.githubapitest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,8 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     private val model by viewModel<MainActivityViewModel>()
     private lateinit var adater: UsersAdapter
+    private var filters = FilterParameters()
     private lateinit var scrollListener: RecyclerView.OnScrollListener
-    private val list = ArrayList<repos>()
+    private val list = ArrayList<Repos>()
     private val layoutManager = GridLayoutManager(this, 1)
     private val lastVisibleItemPosition: Int
         get() = layoutManager.findLastVisibleItemPosition()
@@ -50,13 +55,19 @@ class MainActivity : AppCompatActivity() {
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (searchNsme.text.length > 3) {
                     list.clear()
-                    model.getRepos("1", searchNsme.text.toString())
+                    model.getRepos(
+                        "1",
+                        searchNsme.text.toString(),
+                        filters.sort,
+                        filters.order
+                    )
                     swipeRefresh.isRefreshing = true
                     closeKeyboard()
                     return@OnKeyListener true
                 } else {
                     closeKeyboard()
-                    Toast.makeText(this, "Pesquise com pelo menos 3 caracteres", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Pesquise com pelo menos 3 caracteres", Toast.LENGTH_SHORT)
+                        .show()
                     return@OnKeyListener false
                 }
             }
@@ -64,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun closeKeyboard(){
+    private fun closeKeyboard() {
         val imm = this@MainActivity.getSystemService(Activity.INPUT_METHOD_SERVICE)
                 as InputMethodManager
         imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
@@ -79,8 +90,9 @@ class MainActivity : AppCompatActivity() {
         swipeRefresh.setOnRefreshListener {
             list.clear()
             model.resetPage()
+            filters = FilterParameters()
             searchNsme.setText("")
-            model.getRepos("1")
+            model.getRepos()
         }
     }
 
@@ -117,9 +129,17 @@ class MainActivity : AppCompatActivity() {
                     if (totalItemCount > 15 && totalItemCount == lastVisibleItemPosition + 1) {
                         swipeRefresh.isRefreshing = true
                         if (searchNsme.text.length > 3) {
-                            model.getRepos(model.incrementPage(), searchNsme.text.toString())
+                            model.getRepos(
+                                model.incrementPage(),
+                                searchNsme.text.toString()
+                            )
                         } else {
-                            model.getRepos(model.incrementPage())
+                            model.getRepos(
+                                model.incrementPage(),
+                                "android",
+                                filters.sort,
+                                filters.order
+                            )
                         }
 
                     }
@@ -130,11 +150,56 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun populateData(repos: List<repos>?) {
+    private fun populateData(Repos: List<Repos>?) {
         if (swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }
-        repos?.let { list.addAll(it) }
+        Repos?.let { list.addAll(it) }
         adater.setItem(list)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_right, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_item -> {
+                val intent = Intent(this, FilterActivity::class.java)
+                intent.putExtra("filter", filters)
+                startActivityForResult(intent, 0)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0 && resultCode == 0 && data != null) {
+            filters = data.getSerializableExtra("filters") as FilterParameters
+            list.clear()
+            model.resetPage()
+            swipeRefresh.isRefreshing = true
+            if (searchNsme.text.length > 3) {
+                model.getRepos(
+                    "1",
+                    searchNsme.text.toString(),
+                    filters.sort,
+                    filters.order
+                )
+            } else {
+                model.getRepos(
+                    "1",
+                    "android",
+                    filters.sort,
+                    filters.order
+                )
+            }
+        }
+    }
+
 }

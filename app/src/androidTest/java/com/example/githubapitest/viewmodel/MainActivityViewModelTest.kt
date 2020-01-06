@@ -1,5 +1,7 @@
 package com.example.githubapitest.viewmodel
 
+import com.example.githubapitest.model.Repos
+import com.example.githubapitest.model.Search
 import com.example.githubapitest.model.ViewEvents
 import com.example.githubapitest.repository.usecases.GetUsers
 import com.nhaarman.mockitokotlin2.doReturn
@@ -13,7 +15,7 @@ class MainActivityViewModelTest {
 
     private var getUseCase: GetUsers = mock()
 
-    private val users: List<Users>? = listOf()
+    private val users: Search = mock()
 
     private val viewmodel: MainActivityViewModel = MainActivityViewModel(getUseCase)
 
@@ -24,10 +26,10 @@ class MainActivityViewModelTest {
 
     @Test
     fun when_call_api_should_return_value() {
-        whenever(getUseCase.execute("Letheann","2")) doReturn users
+        whenever(getUseCase.execute("android", "1", "", "desc")) doReturn users
 
         viewmodel.getRepos()
 
-        assertEquals(ViewEvents.SuccessGetUsers(users), viewmodel.viewState.value)
+        assertEquals(ViewEvents.SuccessGetUsers(users.items), viewmodel.viewState.value)
     }
 }

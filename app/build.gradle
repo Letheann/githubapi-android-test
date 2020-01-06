@@ -8,6 +8,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.example.githubapitest"
         minSdkVersion 15
         targetSdkVersion 29
@@ -26,6 +27,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.multidex:multidex:$multidex_version"
 
     //androidx
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -55,6 +57,9 @@ dependencies {
     // glide circular
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //joda time
+    implementation 'net.danlew:android.joda:2.10.3'
 
     testImplementation 'junit:junit:4.12'
     implementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
