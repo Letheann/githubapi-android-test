@@ -2,15 +2,20 @@ package com.example.githubapitest.repository.usecases
 
 import com.example.githubapitest.model.Search
 import com.example.githubapitest.repository.RetrofitBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 
 open class GetUsers {
-    fun execute(
+    suspend fun execute(
         q: String,
         page: String,
         sort: String?,
         order: String?
-    ): Search? =
+    ): Search? = withContext(IO) {
         RetrofitBuilder().service.getReposList(q, page, sort, order).execute().body()
+
+    }
+
+
 }
-
-

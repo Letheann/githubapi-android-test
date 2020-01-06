@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
 import com.example.githubapitest.model.FilterParameters
-import com.example.githubapitest.model.ViewEvents
 import com.example.githubapitest.model.Repos
+import com.example.githubapitest.model.ViewEvents
 import com.example.githubapitest.ui.adapter.UsersAdapter
 import com.example.githubapitest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
