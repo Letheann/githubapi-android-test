@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DetailsActivity : AppCompatActivity() {
 
     private val model by viewModel<DetailsViewModel>()
-    private lateinit var repos: Repos
+    private var repos: Repos? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -44,14 +44,14 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun populateLayout() {
         Glide.with(this)
-            .load(repos.owner?.avatarUrl)
+            .load(repos?.owner?.avatarUrl)
             .into(profileImage)
 
-        userName.text = repos.name
-        startValue.text = repos.stargazersCount.toString()
-        forksValueCount.text = repos.forksCount.toString()
-        watchersValue.text = repos.watchersCount.toString()
-        openIssuesValue.text = repos.openIssuesCount.toString()
-        scoreValue.text = repos.score.toString()
+        userName.text = repos?.name
+        startValue.text = repos?.stargazersCount.toString()
+        forksValueCount.text = repos?.forksCount.toString()
+        watchersValue.text = repos?.watchersCount.toString()
+        openIssuesValue.text = repos?.openIssuesCount.toString()
+        scoreValue.text = repos?.score.toString()
     }
 }

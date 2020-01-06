@@ -21,13 +21,11 @@ class MainActivityViewModel(private val repo: GetUsers) : BaseViewModel() {
         order: String? = "desc"
     ) {
         launch {
-            withContext(IO) {
-                try {
-                    val response = repo.execute(q, page, sort, order)
-                    state.postValue(ViewEvents.SuccessGetUsers(response?.items))
-                } catch (exception: Exception) {
-                    print(exception)
-                }
+            try {
+                val response = repo.execute(q, page, sort, order)
+                state.postValue(ViewEvents.SuccessGetUsers(response))
+            } catch (exception: Exception) {
+                print(exception)
             }
         }
     }
@@ -40,4 +38,6 @@ class MainActivityViewModel(private val repo: GetUsers) : BaseViewModel() {
     fun resetPage() {
         page = 2
     }
+
+    fun returnPage(): Int = page
 }

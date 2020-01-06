@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
     private fun initObservers() {
         model.viewState.observe(this, Observer {
             when (it) {
-                is ViewEvents.SuccessGetUsers -> populateData(it.users)
+                is ViewEvents.SuccessGetUsers -> populateData(it.users?.items)
             }
         })
     }
