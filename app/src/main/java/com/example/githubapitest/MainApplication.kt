@@ -8,9 +8,12 @@ import org.koin.core.context.startKoin
 
 class MainApplication : Application() {
 
+    companion object{
+        const val APPLICATION = "main"
+    }
+
     override fun onCreate() {
         super.onCreate()
-        // start Koin context
         startKoin {
             androidContext(this@MainApplication)
             androidLogger()

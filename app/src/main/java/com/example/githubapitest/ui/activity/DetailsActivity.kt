@@ -4,28 +4,25 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.githubapitest.R
+import com.example.githubapitest.helper.extensions.extrasBundle
 import com.example.githubapitest.model.Repos
-import com.example.githubapitest.viewmodel.DetailsViewModel
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.users_layout.profileImage
 import kotlinx.android.synthetic.main.users_layout.userName
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsActivity : AppCompatActivity() {
 
-    private val model by viewModel<DetailsViewModel>()
     private var repos: Repos? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-
         init()
         load()
     }
 
 
     private fun init() {
-        repos = model.getReposByIntent(intent)
+        repos = intent.extrasBundle(REPOS)
         setupToolbar()
     }
 
@@ -53,5 +50,10 @@ class DetailsActivity : AppCompatActivity() {
         watchersValue.text = repos?.watchersCount.toString()
         openIssuesValue.text = repos?.openIssuesCount.toString()
         scoreValue.text = repos?.score.toString()
+    }
+
+
+    companion object{
+        const val REPOS = "repos"
     }
 }

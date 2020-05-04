@@ -14,6 +14,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
+import com.example.githubapitest.helper.extensions.toActivity
+import com.example.githubapitest.helper.extensions.toActivityForResult
 import com.example.githubapitest.model.FilterParameters
 import com.example.githubapitest.model.Repos
 import com.example.githubapitest.model.ViewEvents
@@ -26,7 +28,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
 
     private val model by viewModel<MainActivityViewModel>()
-    private lateinit var adater: UsersAdapter
+    private val adater by lazy {
+        UsersAdapter(this, ::actionClickListener)
+    }
+
+    private fun actionClickListener(user: Repos?) {
+        toActivity<DetailsActivity> { putSerializable(DetailsActivity.REPOS, user) }
+    }
+
     private var filters = FilterParameters()
     private lateinit var scrollListener: RecyclerView.OnScrollListener
     private val list = ArrayList<Repos>()
@@ -99,7 +108,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager
-        adater = UsersAdapter(this)
         recyclerView.adapter = adater
     }
 
@@ -166,9 +174,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_item -> {
-                val intent = Intent(this, FilterActivity::class.java)
-                intent.putExtra("filter", filters)
-                startActivityForResult(intent, 0)
+                toActivityForResult<FilterActivity>(requestCode = 0) {
+                    putSerializable(
+                        FilterActivity.FILTER,
+                        filters
+                    )
+                }
                 true
             }
             else -> {
@@ -180,7 +191,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == 0 && data != null) {
-            filters = data.getSerializableExtra("filters") as FilterParameters
+            filters = data.getSerializableExtra(FilterActivity.FILTERS_RESULT) as FilterParameters
             list.clear()
             model.resetPage()
             swipeRefresh.isRefreshing = true

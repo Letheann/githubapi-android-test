@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.example.githubapitest.R
+import com.example.githubapitest.helper.extensions.extras
+import com.example.githubapitest.helper.extensions.extrasBundle
 import com.example.githubapitest.model.FilterParameters
 import com.example.githubapitest.viewmodel.FilterViewModel
 import com.google.android.material.button.MaterialButton
@@ -17,8 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilterActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val model by viewModel<FilterViewModel>()
-    private var filters = FilterParameters()
+    private var filters: FilterParameters? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
@@ -33,7 +34,7 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun load() {
-        filters = model.getReposByIntent(intent)
+        filters = intent.extrasBundle(FILTER) ?: FilterParameters()
         populateLayoutByFilter(filters)
     }
 
@@ -46,8 +47,8 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
         applyFilters.setOnClickListener(this)
     }
 
-    private fun populateLayoutByFilter(filters: FilterParameters) {
-        if (filters.sort != null && filters.sort != "") {
+    private fun populateLayoutByFilter(filters: FilterParameters?) {
+        if (filters?.sort != null && filters.sort != "") {
             when (filters.sort) {
                 "forks" -> {
                     updateColors(forksButton, R.color.Black, R.color.White, true)
@@ -68,7 +69,7 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        if (filters.order != null && filters.order != "") {
+        if (filters?.order != null && filters.order != "") {
             when (filters.order) {
                 "asc" -> {
                     updateColors(ascButton, R.color.Black, R.color.White, true)
@@ -98,34 +99,34 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
             R.id.ascButton -> {
                 updateColors(ascButton, R.color.Black, R.color.White, true)
                 updateColors(descButton, R.color.GrayBackground, R.color.Black, false)
-                filters.order = "asc"
+                filters?.order = "asc"
             }
             R.id.descButton -> {
                 updateColors(descButton, R.color.Black, R.color.White, true)
                 updateColors(ascButton, R.color.GrayBackground, R.color.Black, false)
-                filters.order = "desc"
+                filters?.order = "desc"
             }
             R.id.forksButton -> {
                 updateColors(forksButton, R.color.Black, R.color.White, true)
                 updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
-                filters.sort = "forks"
+                filters?.sort = "forks"
             }
             R.id.updatedButton -> {
                 updateColors(updatedButton, R.color.Black, R.color.White, true)
                 updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
-                filters.sort = "updated"
+                filters?.sort = "updated"
             }
             R.id.starsButton -> {
                 updateColors(starsButton, R.color.Black, R.color.White, true)
                 updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
-                filters.sort = "stars"
+                filters?.sort = "stars"
             }
 
             R.id.applyFilters -> {
-                setResult(0, Intent().putExtra("filters", filters))
+                setResult(0, Intent().putExtra(FILTERS_RESULT, filters))
                 finish()
             }
         }
@@ -156,5 +157,10 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
             view.icon = null
         }
 
+    }
+
+    companion object {
+        const val FILTER = "filter"
+        const val FILTERS_RESULT = "filters_result"
     }
 }
