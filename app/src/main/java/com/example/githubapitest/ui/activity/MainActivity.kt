@@ -14,6 +14,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
+import com.example.githubapitest.helper.extensions.onScrollStateChange
+import com.example.githubapitest.helper.extensions.onScrolled
 import com.example.githubapitest.helper.extensions.toActivity
 import com.example.githubapitest.helper.extensions.toActivityForResult
 import com.example.githubapitest.model.FilterParameters
@@ -37,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var filters = FilterParameters()
-    private lateinit var scrollListener: RecyclerView.OnScrollListener
     private val list = ArrayList<Repos>()
     private val layoutManager = GridLayoutManager(this, 1)
     private val lastVisibleItemPosition: Int
@@ -129,32 +130,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerViewScrollListener() {
-        scrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                val totalItemCount = recyclerView.layoutManager?.itemCount
-                if (totalItemCount != null) {
-                    if (totalItemCount > 15 && totalItemCount == lastVisibleItemPosition + 1) {
-                        swipeRefresh.isRefreshing = true
-                        if (searchNsme.text.length > 3) {
-                            model.getRepos(
-                                model.incrementPage(),
-                                searchNsme.text.toString()
-                            )
-                        } else {
-                            model.getRepos(
-                                model.incrementPage(),
-                                "android",
-                                filters.sort,
-                                filters.order
-                            )
-                        }
-
+        recyclerView.onScrollStateChange {
+            val totalItemCount = recyclerView.layoutManager?.itemCount
+            if (totalItemCount != null) {
+                if (totalItemCount > 15 && totalItemCount == lastVisibleItemPosition + 1) {
+                    swipeRefresh.isRefreshing = true
+                    if (searchNsme.text.length > 3) {
+                        model.getRepos(
+                            model.incrementPage(),
+                            searchNsme.text.toString()
+                        )
+                    } else {
+                        model.getRepos(
+                            model.incrementPage(),
+                            "android",
+                            filters.sort,
+                            filters.order
+                        )
                     }
+
                 }
             }
         }
-        recyclerView.addOnScrollListener(scrollListener)
     }
 
 

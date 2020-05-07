@@ -1,6 +1,5 @@
 package com.example.githubapitest.helper.extensions
 
-import android.app.Application
 import android.content.Intent
 import com.example.githubapitest.MainApplication
 

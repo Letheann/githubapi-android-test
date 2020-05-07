@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubapitest.R
+import com.example.githubapitest.helper.extensions.loadFromUrl
 import com.example.githubapitest.model.Repos
 import com.example.githubapitest.ui.activity.DetailsActivity
 import kotlinx.android.synthetic.main.users_layout.view.*
@@ -30,13 +31,7 @@ class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
                 DateTime(Date())
             ).days.toString()
         )
-
-
-        //Loading the image using Glide
-        Glide.with(context)
-            .load(user?.owner?.avatarUrl)
-            .into(itemView.profileImage)
-
+        user?.owner?.avatarUrl?.let { itemView.profileImage.loadFromUrl(it) }
         itemView.cardItem.setOnClickListener {
             clickListener.invoke(user)
         }
