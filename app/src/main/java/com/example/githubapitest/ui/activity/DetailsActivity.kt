@@ -2,9 +2,9 @@ package com.example.githubapitest.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.example.githubapitest.R
 import com.example.githubapitest.helper.extensions.extrasBundle
+import com.example.githubapitest.helper.extensions.loadFromUrl
 import com.example.githubapitest.model.Repos
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.users_layout.profileImage
@@ -32,7 +32,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Detalhes"
+        supportActionBar?.title = getString(R.string.details)
         toolbar.setNavigationIcon(R.drawable.ic_left_arrow)
         toolbar.setNavigationOnClickListener {
             onBackPressed()
@@ -40,10 +40,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun populateLayout() {
-        Glide.with(this)
-            .load(repos?.owner?.avatarUrl)
-            .into(profileImage)
-
+        repos?.owner?.avatarUrl?.let { profileImage.loadFromUrl(it) }
         userName.text = repos?.name
         startValue.text = repos?.stargazersCount.toString()
         forksValueCount.text = repos?.forksCount.toString()
@@ -53,7 +50,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
 
-    companion object{
+    companion object {
         const val REPOS = "repos"
     }
 }

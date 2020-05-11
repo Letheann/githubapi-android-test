@@ -50,18 +50,18 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
     private fun populateLayoutByFilter(filters: FilterParameters?) {
         if (filters?.sort != null && filters.sort != "") {
             when (filters.sort) {
-                "forks" -> {
+               FORKS -> {
                     updateColors(forksButton, R.color.Black, R.color.White, true)
                     updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
                     updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
                 }
-                "updated" -> {
+                UPDATED -> {
                     updateColors(updatedButton, R.color.Black, R.color.White, true)
                     updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                     updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
                 }
 
-                "stars" -> {
+                STARS -> {
                     updateColors(starsButton, R.color.Black, R.color.White, true)
                     updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                     updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
@@ -71,11 +71,11 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
 
         if (filters?.order != null && filters.order != "") {
             when (filters.order) {
-                "asc" -> {
+                ASC -> {
                     updateColors(ascButton, R.color.Black, R.color.White, true)
                     updateColors(descButton, R.color.GrayBackground, R.color.Black, false)
                 }
-                "desc" -> {
+                DESC -> {
                     updateColors(descButton, R.color.Black, R.color.White, true)
                     updateColors(ascButton, R.color.GrayBackground, R.color.Black, false)
                 }
@@ -86,7 +86,7 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Filtros"
+        supportActionBar?.title = getString(R.string.filters)
         toolbar.setNavigationIcon(R.drawable.ic_left_arrow)
         toolbar.setNavigationOnClickListener {
             onBackPressed()
@@ -99,30 +99,30 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
             R.id.ascButton -> {
                 updateColors(ascButton, R.color.Black, R.color.White, true)
                 updateColors(descButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.order = "asc"
+                filters?.order = ASC
             }
             R.id.descButton -> {
                 updateColors(descButton, R.color.Black, R.color.White, true)
                 updateColors(ascButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.order = "desc"
+                filters?.order = DESC
             }
             R.id.forksButton -> {
                 updateColors(forksButton, R.color.Black, R.color.White, true)
                 updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.sort = "forks"
+                filters?.sort = FORKS
             }
             R.id.updatedButton -> {
                 updateColors(updatedButton, R.color.Black, R.color.White, true)
                 updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.sort = "updated"
+                filters?.sort = UPDATED
             }
             R.id.starsButton -> {
                 updateColors(starsButton, R.color.Black, R.color.White, true)
                 updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.sort = "stars"
+                filters?.sort = STARS
             }
 
             R.id.applyFilters -> {
@@ -162,5 +162,10 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val FILTER = "filter"
         const val FILTERS_RESULT = "filters_result"
+        const val ASC = "asc"
+        const val DESC = "desc"
+        const val FORKS = "forks"
+        const val UPDATED = "updated"
+        const val STARS = "stars"
     }
 }

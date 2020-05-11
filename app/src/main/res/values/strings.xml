@@ -17,4 +17,8 @@
     <string name="stars">Stars</string>
     <string name="updatedbutton">Updated</string>
     <string name="aplicar_filtros">Aplicar Filtros</string>
+    <string name="details">Detalhes</string>
+    <string name="filters">Filtros</string>
+    <string name="search_minimum">Pesquise com pelo menos 3 caracteres</string>
+    <string name="repositories">Repositories</string>
 </resources>

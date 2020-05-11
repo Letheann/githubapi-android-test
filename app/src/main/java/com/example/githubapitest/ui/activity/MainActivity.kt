@@ -29,15 +29,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val model by viewModel<MainActivityViewModel>()
     private val adater by lazy {
         UsersAdapter(this, ::actionClickListener)
     }
-
-    private fun actionClickListener(user: Repos?) {
-        toActivity<DetailsActivity> { putSerializable(DetailsActivity.REPOS, user) }
-    }
-
+    private val model by viewModel<MainActivityViewModel>()
     private var filters = FilterParameters()
     private val list = ArrayList<Repos>()
     private val layoutManager = GridLayoutManager(this, 1)
@@ -66,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 if (searchNsme.text.length > 3) {
                     list.clear()
                     model.getRepos(
-                        "1",
+                        DEFAULT_PAGE,
                         searchNsme.text.toString(),
                         filters.sort,
                         filters.order
@@ -76,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     return@OnKeyListener true
                 } else {
                     closeKeyboard()
-                    Toast.makeText(this, "Pesquise com pelo menos 3 caracteres", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, getString(R.string.search_minimum), Toast.LENGTH_SHORT)
                         .show()
                     return@OnKeyListener false
                 }
@@ -93,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Repositories"
+        supportActionBar?.title = getString(R.string.repositories)
     }
 
     private fun setRefreshLayoutListener() {
@@ -143,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         model.getRepos(
                             model.incrementPage(),
-                            "android",
+                            ANDROID,
                             filters.sort,
                             filters.order
                         )
@@ -185,6 +180,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun actionClickListener(user: Repos?) {
+        toActivity<DetailsActivity> { putSerializable(DetailsActivity.REPOS, user) }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == 0 && data != null) {
@@ -194,20 +193,25 @@ class MainActivity : AppCompatActivity() {
             swipeRefresh.isRefreshing = true
             if (searchNsme.text.length > 3) {
                 model.getRepos(
-                    "1",
+                    DEFAULT_PAGE,
                     searchNsme.text.toString(),
                     filters.sort,
                     filters.order
                 )
             } else {
                 model.getRepos(
-                    "1",
-                    "android",
+                    DEFAULT_PAGE,
+                    ANDROID,
                     filters.sort,
                     filters.order
                 )
             }
         }
+    }
+
+    companion object {
+        const val ANDROID = "android"
+        const val DEFAULT_PAGE = "1"
     }
 
 }
