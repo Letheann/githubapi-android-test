@@ -7,19 +7,19 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import com.example.githubapitest.R
-import com.example.githubapitest.helper.extensions.extras
-import com.example.githubapitest.helper.extensions.extrasBundle
+import com.example.githubapitest.helper.extensions.*
 import com.example.githubapitest.model.FilterParameters
-import com.example.githubapitest.viewmodel.FilterViewModel
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.activity_details.toolbar
 import kotlinx.android.synthetic.main.activity_filter.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilterActivity : AppCompatActivity(), View.OnClickListener {
 
     private var filters: FilterParameters? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
@@ -50,7 +50,7 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
     private fun populateLayoutByFilter(filters: FilterParameters?) {
         if (filters?.sort != null && filters.sort != "") {
             when (filters.sort) {
-               FORKS -> {
+                FORKS -> {
                     updateColors(forksButton, R.color.Black, R.color.White, true)
                     updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
                     updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
@@ -144,15 +144,11 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
                 colorText
             )
         )
-        view.background.setColorFilter(
-            ContextCompat.getColor(
-                this,
-                colorButton
-            ), PorterDuff.Mode.SRC_ATOP
-        )
+        view.loadColorBackGround(colorButton)
+
         if (icon) {
-            view.iconTint = ContextCompat.getColorStateList(this, R.color.White)
-            view.icon = AppCompatResources.getDrawable(this, R.drawable.ic_confirm)
+            view.loadColorIconTint(R.color.White)
+            view.loadIcon(R.drawable.ic_confirm)
         } else {
             view.icon = null
         }
@@ -169,3 +165,5 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
         const val STARS = "stars"
     }
 }
+
+

@@ -1,20 +1,18 @@
 package com.example.githubapitest.repository
 
+import com.example.githubapitest.helper.extensions.build
+import com.example.githubapitest.helper.extensions.provideInterface
 import com.example.githubapitest.repository.interfaces.GithubMethods
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitBuilder {
     private val retrofit: Retrofit
 
     val service: GithubMethods
-        get() = retrofit.create(GithubMethods::class.java)
+        get() = retrofit.provideInterface()
 
     init {
-        retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        retrofit = Retrofit.Builder().build(BASE_URL)
     }
 
     companion object {

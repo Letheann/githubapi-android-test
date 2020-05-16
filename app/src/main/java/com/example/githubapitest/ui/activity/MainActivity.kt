@@ -1,23 +1,18 @@
 package com.example.githubapitest.ui.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
-import com.example.githubapitest.helper.extensions.onScrollStateChange
-import com.example.githubapitest.helper.extensions.onScrolled
-import com.example.githubapitest.helper.extensions.toActivity
-import com.example.githubapitest.helper.extensions.toActivityForResult
+import com.example.githubapitest.helper.extensions.*
 import com.example.githubapitest.model.FilterParameters
 import com.example.githubapitest.model.Repos
 import com.example.githubapitest.model.ViewEvents
@@ -71,8 +66,7 @@ class MainActivity : AppCompatActivity() {
                     return@OnKeyListener true
                 } else {
                     closeKeyboard()
-                    Toast.makeText(this, getString(R.string.search_minimum), Toast.LENGTH_SHORT)
-                        .show()
+                    toast(getString(R.string.search_minimum))
                     return@OnKeyListener false
                 }
             }
@@ -80,11 +74,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun closeKeyboard() {
-        val imm = this@MainActivity.getSystemService(Activity.INPUT_METHOD_SERVICE)
-                as InputMethodManager
-        imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
-    }
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
@@ -112,11 +101,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        model.viewState.observe(this, Observer {
+        model.viewState().observe(this) {
             when (it) {
                 is ViewEvents.SuccessGetUsers -> populateData(it.users?.items)
             }
-        })
+        }
     }
 
     private fun getUsers() {
@@ -187,7 +176,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == 0 && data != null) {
-            filters = data.getSerializableExtra(FilterActivity.FILTERS_RESULT) as FilterParameters
+            filters = data.extras(FilterActivity.FILTERS_RESULT) ?: FilterParameters()
             list.clear()
             model.resetPage()
             swipeRefresh.isRefreshing = true

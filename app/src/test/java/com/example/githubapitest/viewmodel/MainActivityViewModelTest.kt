@@ -55,7 +55,7 @@ class MainActivityViewModelTest {
         assertEquals(
             ViewEvents.SuccessGetUsers(
                 users
-            ), viewmodel.viewState.value
+            ), viewmodel.viewState().value
         )
     }
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 class MainActivityViewModel(private val repo: GetUsers) : BaseViewModel() {
 
     private val state = MutableLiveData<ViewEvents>()
-    val viewState: LiveData<ViewEvents> = state
+    fun viewState(): LiveData<ViewEvents> = state
     private var page = 2
 
     fun getRepos(
