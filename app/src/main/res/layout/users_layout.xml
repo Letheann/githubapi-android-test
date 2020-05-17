@@ -4,20 +4,20 @@
     android:id="@+id/cardItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/cardview_default_radius">
+    android:layout_margin="@dimen/dimens2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#242528">
+        android:background="@color/black_issue">
         
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_width="@dimen/dimens42dp"
+            android:layout_height="@dimen/dimens42dp"
+            android:layout_marginStart="@dimen/dimens32dp"
+            android:layout_marginLeft="@dimen/dimens24dp"
+            android:layout_marginTop="@dimen/dimens32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,16 +27,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/profileImage"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="@dimen/dimens10dp"
+            android:layout_marginLeft="@dimen/dimens10dp"
             android:text="@string/user_repo"
             android:maxLength="19"
-            android:textColor="#FFFFFF"
-
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/profileImage"
-            app:layout_constraintStart_toEndOf="@+id/profileImage"
-            app:layout_constraintTop_toTopOf="@+id/profileImage" />
+            android:textColor="@color/White"
+            android:textSize="@dimen/dimens15sp"
+            app:layout_constraintBottom_toBottomOf="@id/profileImage"
+            app:layout_constraintStart_toEndOf="@id/profileImage"
+            app:layout_constraintTop_toTopOf="@id/profileImage" />
 
         <TextView
             android:id="@+id/starsText"
@@ -45,12 +44,12 @@
             android:layout_below="@id/userName"
             android:layout_centerHorizontal="true"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginRight="@dimen/dimens24dp"
             android:gravity="center"
-            android:textColor="#8F95A1"
+            android:textColor="@color/gray"
             android:text="@string/total_de_estrelas"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/userName" />
+            app:layout_constraintTop_toTopOf="@id/userName" />
 
         <TextView
             android:id="@+id/starValue"
@@ -60,85 +59,80 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/_5000"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="@+id/starsText"
-            app:layout_constraintTop_toBottomOf="@+id/starsText" />
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="@id/starsText"
+            app:layout_constraintTop_toBottomOf="@id/starsText" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dimens20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileImage"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@id/profileImage"
             android:background="#000000">
 
             <TextView
                 android:id="@+id/DataText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginRight="100dp"
+                android:layout_marginTop="@dimen/dimens20dp"
+                android:layout_marginEnd="@dimen/dimens100dp"
+                android:layout_marginRight="@dimen/dimens100dp"
                 android:text="@string/data"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/forksText"
+                app:layout_constraintStart_toEndOf="@id/forksText"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/DataValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/dimens4dp"
+                android:layout_marginBottom="@dimen/dimens20dp"
                 android:text="@string/_5000"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/White"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/DataText"
-                app:layout_constraintStart_toStartOf="@+id/DataText"
-                app:layout_constraintTop_toBottomOf="@+id/DataText" />
+                app:layout_constraintEnd_toEndOf="@id/DataText"
+                app:layout_constraintStart_toStartOf="@id/DataText"
+                app:layout_constraintTop_toBottomOf="@id/DataText" />
 
             <TextView
                 android:id="@+id/forksText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dimens20dp"
                 android:text="@string/forks"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toStartOf="@+id/DataText"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/followersText"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toStartOf="@id/DataText"
+                app:layout_constraintStart_toEndOf="@id/followersText"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/forksValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/dimens4dp"
+                android:layout_marginBottom="@dimen/dimens20dp"
                 android:text="@string/_5000"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/White"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/forksText"
-                app:layout_constraintStart_toStartOf="@+id/forksText"
-                app:layout_constraintTop_toBottomOf="@+id/forksText" />
+                app:layout_constraintEnd_toEndOf="@id/forksText"
+                app:layout_constraintStart_toStartOf="@id/forksText"
+                app:layout_constraintTop_toBottomOf="@id/forksText" />
 
             <TextView
                 android:id="@+id/followersText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/dimens50dp"
+                android:layout_marginLeft="@dimen/dimens50dp"
+                android:layout_marginTop="@dimen/dimens20dp"
                 android:text="@string/seguidores"
                 android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toStartOf="@+id/forksText"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@id/forksText"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -147,14 +141,14 @@
                 android:id="@+id/followersValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/dimens4dp"
+                android:layout_marginBottom="@dimen/dimens20dp"
                 android:text="@string/_5000"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/White"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/followersText"
-                app:layout_constraintStart_toStartOf="@+id/followersText"
-                app:layout_constraintTop_toBottomOf="@+id/followersText" />
+                app:layout_constraintEnd_toEndOf="@id/followersText"
+                app:layout_constraintStart_toStartOf="@id/followersText"
+                app:layout_constraintTop_toBottomOf="@id/followersText" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

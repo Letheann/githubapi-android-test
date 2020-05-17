@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/dimens150dp"
         android:background="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,37 +33,36 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_width="@dimen/dimens0dp"
+        android:layout_height="@dimen/dimens0dp"
+        android:layout_marginStart="@dimen/dimens20dp"
+        android:layout_marginLeft="@dimen/dimens20dp"
+        android:layout_marginTop="@dimen/dimens120dp"
+        android:layout_marginEnd="@dimen/dimens20dp"
+        android:layout_marginRight="@dimen/dimens20dp"
         android:background="@drawable/rounded_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraint">
+        app:layout_constraintTop_toTopOf="@id/constraint">
 
         <View
             android:id="@+id/view2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/dimens0dp"
+            android:layout_height="@dimen/dimens1dp"
+            android:layout_marginTop="@dimen/dimens20dp"
             android:background="#D9DBDF"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/openIssuesValue" />
+            app:layout_constraintTop_toBottomOf="@id/openIssuesValue" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_width="@dimen/dimens42dp"
+            android:layout_height="@dimen/dimens42dp"
+            android:layout_marginStart="@dimen/dimens24dp"
+            android:layout_marginLeft="@dimen/dimens24dp"
+            android:layout_marginTop="@dimen/dimens32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,15 +72,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/profileImage"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="@dimen/dimens10dp"
+            android:layout_marginLeft="@dimen/dimens10dp"
             android:maxLength="15"
             android:text="@string/user_repo"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/profileImage"
-            app:layout_constraintStart_toEndOf="@+id/profileImage"
-            app:layout_constraintTop_toTopOf="@+id/profileImage" />
+            android:textSize="@dimen/dimens15sp"
+            app:layout_constraintBottom_toBottomOf="@id/profileImage"
+            app:layout_constraintStart_toEndOf="@id/profileImage"
+            app:layout_constraintTop_toTopOf="@id/profileImage" />
 
         <TextView
             android:id="@+id/starsText"
@@ -89,13 +88,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/userName"
             android:layout_centerHorizontal="true"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginEnd="@dimen/dimens24dp"
+            android:layout_marginRight="@dimen/dimens24dp"
             android:gravity="center"
             android:text="@string/total_de_estrelas"
-            android:textColor="#8F95A1"
+            android:textColor="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/userName" />
+            app:layout_constraintTop_toTopOf="@id/userName" />
 
         <TextView
             android:id="@+id/startValue"
@@ -106,22 +105,22 @@
             android:gravity="center"
             android:text="@string/_5000"
             android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="@+id/starsText"
-            app:layout_constraintTop_toBottomOf="@+id/starsText" />
+            app:layout_constraintEnd_toEndOf="@id/starsText"
+            app:layout_constraintTop_toBottomOf="@id/starsText" />
 
         <TextView
             android:id="@+id/forksText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/dimens24dp"
+            android:layout_marginLeft="@dimen/dimens24dp"
+            android:layout_marginTop="@dimen/dimens20dp"
             android:gravity="center"
             android:text="@string/forks"
-            android:textColor="#8F95A1"
+            android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@id/view" />
 
         <TextView
             android:id="@+id/forksValueCount"
@@ -131,22 +130,22 @@
             android:gravity="center"
             android:text="@string/_5000"
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toStartOf="@+id/forksText"
-            app:layout_constraintTop_toBottomOf="@+id/forksText" />
+            app:layout_constraintStart_toStartOf="@id/forksText"
+            app:layout_constraintTop_toBottomOf="@id/forksText" />
 
         <TextView
             android:id="@+id/watchersCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/dimens60dp"
+            android:layout_marginLeft="@dimen/dimens60dp"
+            android:layout_marginTop="@dimen/dimens20dp"
             android:gravity="center"
             android:text="@string/watchers"
-            android:textColor="#8F95A1"
-            app:layout_constraintStart_toEndOf="@+id/forksText"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toEndOf="@id/forksText"
+            app:layout_constraintTop_toBottomOf="@id/view" />
 
         <TextView
             android:id="@+id/watchersValue"
@@ -156,20 +155,20 @@
             android:gravity="center"
             android:text="@string/_5000"
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toStartOf="@+id/watchersCount"
-            app:layout_constraintTop_toBottomOf="@+id/watchersCount" />
+            app:layout_constraintStart_toStartOf="@id/watchersCount"
+            app:layout_constraintTop_toBottomOf="@id/watchersCount" />
 
         <TextView
             android:id="@+id/openIssuesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dimens20dp"
             android:gravity="center"
             android:text="@string/open_issues"
-            android:textColor="#8F95A1"
-            app:layout_constraintStart_toStartOf="@+id/forksValueCount"
-            app:layout_constraintTop_toBottomOf="@+id/forksValueCount" />
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/forksValueCount"
+            app:layout_constraintTop_toBottomOf="@id/forksValueCount" />
 
         <TextView
             android:id="@+id/openIssuesValue"
@@ -179,20 +178,20 @@
             android:gravity="center"
             android:text="@string/_5000"
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toStartOf="@+id/openIssuesText"
-            app:layout_constraintTop_toBottomOf="@+id/openIssuesText" />
+            app:layout_constraintStart_toStartOf="@id/openIssuesText"
+            app:layout_constraintTop_toBottomOf="@id/openIssuesText" />
 
         <TextView
             android:id="@+id/scoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dimens20dp"
             android:gravity="center"
             android:text="@string/score"
-            android:textColor="#8F95A1"
-            app:layout_constraintStart_toStartOf="@+id/watchersValue"
-            app:layout_constraintTop_toBottomOf="@+id/watchersValue" />
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@id/watchersValue"
+            app:layout_constraintTop_toBottomOf="@id/watchersValue" />
 
 
         <TextView
@@ -203,18 +202,18 @@
             android:gravity="center"
             android:text="@string/_5000"
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toStartOf="@+id/scoreText"
-            app:layout_constraintTop_toBottomOf="@+id/scoreText" />
+            app:layout_constraintStart_toStartOf="@id/scoreText"
+            app:layout_constraintTop_toBottomOf="@id/scoreText" />
 
         <View
             android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/dimens0dp"
+            android:layout_height="@dimen/dimens1dp"
+            android:layout_marginTop="@dimen/dimens20dp"
             android:background="#D9DBDF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+            app:layout_constraintTop_toBottomOf="@id/profileImage" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

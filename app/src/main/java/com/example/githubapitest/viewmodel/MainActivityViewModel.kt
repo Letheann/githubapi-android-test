@@ -34,7 +34,7 @@ class MainActivityViewModel(private val repo: GetUsers) : BaseViewModel() {
 
 
     fun incrementPage(): String {
-        return "" + (page++) + ""
+        return (page++).toString()
     }
 
     fun resetPage() {

@@ -2,14 +2,11 @@ package com.example.githubapitest.ui.holder
 
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.githubapitest.R
 import com.example.githubapitest.helper.extensions.loadFromUrl
 import com.example.githubapitest.model.Repos
-import com.example.githubapitest.ui.activity.DetailsActivity
 import kotlinx.android.synthetic.main.users_layout.view.*
 import org.joda.time.DateTime
 import org.joda.time.Days
@@ -25,9 +22,11 @@ class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.starValue.text = user?.stargazersCount.toString()
         itemView.followersValue.text = user?.watchersCount.toString()
         itemView.forksValue.text = user?.forksCount.toString()
+
+
         itemView.DataValue.text = context.getString(
             R.string.dias, Days.daysBetween(
-                DateTime(user?.createdAt),
+                DateTime(user?.pushedAt),
                 DateTime(Date())
             ).days.toString()
         )
