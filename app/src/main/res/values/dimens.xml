@@ -19,6 +19,5 @@
     <dimen name="dimens4dp">4dp</dimen>
     <dimen name="dimens50dp">50dp</dimen>
     <dimen name="dimens100dp">100dp</dimen>
-    <dimen name="dimens15sp">15sp</dimen>
     <dimen name="dimens2dp">2dp</dimen>
 </resources>

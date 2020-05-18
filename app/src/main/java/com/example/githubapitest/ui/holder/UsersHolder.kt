@@ -25,7 +25,7 @@ class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
         itemView.DataValue.text = context.getString(
-            R.string.dias, Days.daysBetween(
+            R.string.days, Days.daysBetween(
                 DateTime(user?.pushedAt),
                 DateTime(Date())
             ).days.toString()

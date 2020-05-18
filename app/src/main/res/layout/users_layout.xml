@@ -47,7 +47,7 @@
             android:layout_marginRight="@dimen/dimens24dp"
             android:gravity="center"
             android:textColor="@color/gray"
-            android:text="@string/total_de_estrelas"
+            android:text="@string/total_of_stars"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/userName" />
 
@@ -130,7 +130,7 @@
                 android:layout_marginStart="@dimen/dimens50dp"
                 android:layout_marginLeft="@dimen/dimens50dp"
                 android:layout_marginTop="@dimen/dimens20dp"
-                android:text="@string/seguidores"
+                android:text="@string/followers"
                 android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toStartOf="@id/forksText"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"

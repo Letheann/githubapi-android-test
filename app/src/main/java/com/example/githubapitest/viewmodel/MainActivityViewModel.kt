@@ -2,6 +2,7 @@ package com.example.githubapitest.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.githubapitest.helper.extensions.add
 import com.example.githubapitest.model.ViewEvents
 import com.example.githubapitest.repository.usecases.GetUsers
 import com.example.githubapitest.ui.activity.FilterActivity
@@ -22,7 +23,7 @@ class MainActivityViewModel(private val repo: GetUsers) : BaseViewModel() {
         sort: String? = "",
         order: String? = FilterActivity.DESC
     ) {
-        launch {
+        jobs add launch {
             try {
                 val response = repo.execute(q, page, sort, order)
                 state.postValue(ViewEvents.SuccessGetUsers(response))

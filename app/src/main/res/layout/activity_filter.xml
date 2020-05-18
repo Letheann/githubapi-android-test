@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimens20dp"
-        android:text="@string/ordem"
+        android:text="@string/order"
         app:layout_constraintStart_toStartOf="@id/ascButton"
         app:layout_constraintTop_toBottomOf="@id/view2" />
 
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimens20dp"
-        android:text="@string/filtros"
+        android:text="@string/filters"
         app:layout_constraintStart_toStartOf="@id/starsButton"
         app:layout_constraintTop_toBottomOf="@id/view" />
 
@@ -133,7 +133,7 @@
         android:layout_marginRight="@dimen/dimens40dp"
         android:layout_marginBottom="@dimen/dimens20dp"
         android:backgroundTint="@color/Black"
-        android:text="@string/aplicar_filtros"
+        android:text="@string/apply_filters"
         android:textColor="@android:color/white"
         android:textSize="@dimen/dimens10sp"
         app:layout_constraintBottom_toBottomOf="parent"
