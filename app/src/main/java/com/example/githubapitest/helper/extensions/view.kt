@@ -4,22 +4,28 @@ import android.app.Activity
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 
 
-fun RecyclerView.onScrollStateChange(action: () -> Unit) {
-    this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            action.invoke()
-        }
-    })
+fun RecyclerView.onScrollStateChange(action: () -> Unit, disableListener: Boolean = false) {
+    if (disableListener) {
+        this.clearOnScrollListeners()
+    } else {
+        this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                action.invoke()
+            }
+        })
+    }
 }
 
 fun ImageView.loadFromUrl(url: String) {
@@ -51,5 +57,17 @@ fun MaterialButton.loadColorIconTint(color: Int) {
 
 fun MaterialButton.loadIcon(icConfirm: Int) {
     this.icon = AppCompatResources.getDrawable(this.context, icConfirm)
+}
+
+fun EditText.clearText() {
+    this.setText("")
+}
+
+fun SwipeRefreshLayout.refreshing() {
+    this.isRefreshing = true
+}
+
+fun SwipeRefreshLayout.notRefreshing() {
+    this.isRefreshing = false
 }
 

@@ -3,8 +3,6 @@ package com.example.githubapitest.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.githubapitest.helper.RoomConverters
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -169,7 +167,7 @@ data class Repos(
     val hasPages: Boolean? = null,
 
     @field:SerializedName("owner")
-    val owner: Owner,
+    val owner: Owner? = null,
 
     @field:SerializedName("commits_url")
     val commitsUrl: String? = null,

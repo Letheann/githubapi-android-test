@@ -12,6 +12,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="@dimen/dimens20dp"
         android:text="@string/order"
         app:layout_constraintStart_toStartOf="@id/ascButton"
@@ -19,24 +21,26 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ascButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/CustomOutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="@dimen/dimens30dp"
         android:background="@android:color/transparent"
         android:text="@string/asc"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
-        app:layout_constraintStart_toStartOf="@id/starsButton"
+        app:layout_constraintStart_toStartOf="@id/favsButton"
         app:layout_constraintTop_toBottomOf="@id/textView2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/descButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/CustomOutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimens20dp"
-        android:layout_marginLeft="@dimen/dimens20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:background="@android:color/transparent"
         android:text="@string/desc"
         android:textColor="@android:color/black"
@@ -74,57 +78,87 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="@dimen/dimens20dp"
         android:text="@string/filters"
-        app:layout_constraintStart_toStartOf="@id/starsButton"
+        app:layout_constraintStart_toStartOf="@id/favsButton"
         app:layout_constraintTop_toBottomOf="@id/view" />
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/starsButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:id="@+id/favsButton"
+        style="@style/CustomOutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:text="@string/favs"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dimens10sp"
+        app:layout_constraintEnd_toStartOf="@+id/forksButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/starsButton"
+        style="@style/CustomOutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
         android:background="@android:color/transparent"
         android:text="@string/stars"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
-        app:layout_constraintEnd_toStartOf="@id/forksButton"
+        app:layout_constraintEnd_toStartOf="@+id/updatedButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/forksButton" />
+        app:layout_constraintTop_toBottomOf="@+id/favsButton" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/forksButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/CustomOutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimens30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:background="@android:color/transparent"
         android:text="@string/forks"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
-        app:layout_constraintEnd_toStartOf="@+id/updatedButton"
-        app:layout_constraintStart_toEndOf="@id/starsButton"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/favsButton"
+        app:layout_constraintTop_toTopOf="@+id/favsButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/updatedButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/CustomOutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
         android:background="@android:color/transparent"
         android:text="@string/updatedbutton"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/forksButton"
-        app:layout_constraintTop_toTopOf="@id/forksButton" />
-
+        app:layout_constraintStart_toEndOf="@+id/starsButton"
+        app:layout_constraintTop_toBottomOf="@+id/forksButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/applyFilters"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/CustomOutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimens40dp"

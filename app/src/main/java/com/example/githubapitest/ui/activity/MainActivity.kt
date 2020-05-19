@@ -24,12 +24,11 @@ class MainActivity : AppCompatActivity() {
     private val adater by lazy {
         UsersAdapter(this, ::actionClickListener)
     }
-    private val model by viewModel<MainActivityViewModel>()
+    private val viewModel by viewModel<MainActivityViewModel>()
     private var filters = FilterParameters()
     private val list = ArrayList<Repos>()
     private val layoutManager = GridLayoutManager(this, 1)
-    private val lastVisibleItemPosition: Int
-        get() = layoutManager.findLastVisibleItemPosition()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +47,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setEditTextActionListener() {
-        searchNsme.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+        searchName.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                if (searchNsme.text.length > 3) {
+                if (searchName.text.length > 3) {
                     list.clear()
-                    model.getRepos(
+                    filters.clearFilters()
+                    viewModel.getRepos(
                         DEFAULT_PAGE,
-                        searchNsme.text.toString(),
+                        searchName.text.toString(),
                         filters.sort,
                         filters.order
                     )
@@ -80,10 +80,10 @@ class MainActivity : AppCompatActivity() {
     private fun setRefreshLayoutListener() {
         swipeRefresh.setOnRefreshListener {
             list.clear()
-            model.resetPage()
-            filters = FilterParameters()
-            searchNsme.setText("")
-            model.getRepos()
+            viewModel.resetPage()
+            filters.clearFilters()
+            searchName.clearText()
+            viewModel.getRepos()
         }
     }
 
@@ -98,47 +98,55 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        model.viewState().observe(this) {
+        viewModel.viewState().observe(this) {
             when (it) {
-                is ViewEvents.SuccessGetUsers -> populateData(it.users?.items)
+                is ViewEvents.SuccessGetUsers -> populateData(it.users)
+                is ViewEvents.ErrorRequest -> showErrorRequest()
             }
         }
+    }
+
+    private fun showErrorRequest() {
+        toast("Erro de request")
+        swipeRefresh.notRefreshing()
     }
 
     private fun getUsers() {
-        model.getRepos()
-        swipeRefresh.isRefreshing = true
+        viewModel.getRepos()
+        swipeRefresh.refreshing()
     }
 
     private fun setRecyclerViewScrollListener() {
-        recyclerView.onScrollStateChange {
-            val totalItemCount = recyclerView.layoutManager?.itemCount
-            if (totalItemCount != null) {
-                if (totalItemCount > 15 && totalItemCount == lastVisibleItemPosition + 1) {
-                    swipeRefresh.isRefreshing = true
-                    if (searchNsme.text.length > 3) {
-                        model.getRepos(
-                            model.incrementPage(),
-                            searchNsme.text.toString()
-                        )
-                    } else {
-                        model.getRepos(
-                            model.incrementPage(),
-                            ANDROID,
-                            filters.sort,
-                            filters.order
-                        )
-                    }
+        recyclerView.onScrollStateChange({
+            if (!filters.favorites) {
+                val totalItemCount = recyclerView.layoutManager?.itemCount
+                if (totalItemCount != null) {
+                    if (totalItemCount > 15 && totalItemCount == layoutManager.findLastVisibleItemPosition() + 1) {
+                        swipeRefresh.isRefreshing = true
+                        if (searchName.text.length > 3) {
+                            viewModel.getRepos(
+                                viewModel.incrementPage(),
+                                searchName.text.toString()
+                            )
+                        } else {
+                            viewModel.getRepos(
+                                viewModel.incrementPage(),
+                                ANDROID,
+                                filters.sort,
+                                filters.order
+                            )
+                        }
 
+                    }
                 }
             }
-        }
+        })
     }
 
 
     private fun populateData(Repos: List<Repos>?) {
         if (swipeRefresh.isRefreshing) {
-            swipeRefresh.isRefreshing = false
+            swipeRefresh.notRefreshing()
         }
         Repos?.let { list.addAll(it) }
         adater.setItem(list)
@@ -175,23 +183,29 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == 0 && resultCode == 0 && data != null) {
             filters = data.extras(FilterActivity.FILTERS_RESULT) ?: FilterParameters()
             list.clear()
-            model.resetPage()
-            swipeRefresh.isRefreshing = true
-            if (searchNsme.text.length > 3) {
-                model.getRepos(
-                    DEFAULT_PAGE,
-                    searchNsme.text.toString(),
-                    filters.sort,
-                    filters.order
-                )
+            viewModel.resetPage()
+            swipeRefresh.refreshing()
+            if (filters.favorites) {
+                filters.order?.let { viewModel.loadItemsFromFav(it) }
             } else {
-                model.getRepos(
-                    DEFAULT_PAGE,
-                    ANDROID,
-                    filters.sort,
-                    filters.order
-                )
+                setRecyclerViewScrollListener()
+                if (searchName.text.length > 3) {
+                    viewModel.getRepos(
+                        DEFAULT_PAGE,
+                        searchName.text.toString(),
+                        filters.sort,
+                        filters.order
+                    )
+                } else {
+                    viewModel.getRepos(
+                        DEFAULT_PAGE,
+                        ANDROID,
+                        filters.sort,
+                        filters.order
+                    )
+                }
             }
+
         }
     }
 

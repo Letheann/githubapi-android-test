@@ -7,11 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.githubapitest.MainApplication
 import com.example.githubapitest.dao.db.ReposDataBase
-import com.example.githubapitest.helper.RoomConverters
+import com.example.githubapitest.helper.utils.RoomConverters
 
 import com.example.githubapitest.model.Repos
 
-@Database(entities = [Repos::class], version = 1, exportSchema = false)
+@Database(entities = [Repos::class], version = 2, exportSchema = false)
 @TypeConverters(RoomConverters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -26,7 +26,6 @@ abstract class AppDatabase : RoomDatabase() {
             sInstance = Room
                 .databaseBuilder(MainApplication.context, AppDatabase::class.java, "androidBD")
                 .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
                 .build()
             return sInstance
         }

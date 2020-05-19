@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val mainModule = module {
     single { GetUsers() }
     single { AppDatabase.getInstance() }
-    viewModel { MainActivityViewModel(get()) }
+    viewModel { MainActivityViewModel(get(), get()) }
     viewModel { DetailsViewModel(get()) }
 }

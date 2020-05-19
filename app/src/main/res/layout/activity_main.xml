@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/view">
 
         <EditText
-            android:id="@+id/searchNsme"
+            android:id="@+id/searchName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimens10dp"

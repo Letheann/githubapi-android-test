@@ -15,10 +15,23 @@ class DetailsViewModel(private val dao: AppDatabase) : BaseViewModel() {
 
     fun saveRepoToFav(repos: Repos?) {
         jobs add async {
-            repos?.let { dao.reposDataBase().insertItem(it) }
-            state.postValue(ViewEvents.SavedDataRepo())
+            try {
+                repos?.let { dao.reposDataBase().insertItem(it) }
+                state.postValue(ViewEvents.SavedDataRepo())
+            } catch (e: Exception) {
+                state.postValue(ViewEvents.CannotSaveDataRepo())
+            }
+        }
+    }
+
+    fun verifyDataIsAlreadySaved(repos: Repos?) {
+        jobs add async {
+            if (repos?.id?.let { dao.reposDataBase().loadRepoById(it) } != null) {
+                state.postValue(ViewEvents.SavedDataRepo())
+            }
         }
     }
 }
+
 
 

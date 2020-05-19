@@ -3,11 +3,7 @@ package com.example.githubapitest.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.githubapitest.R
-import com.example.githubapitest.dao.AppDatabase
-import com.example.githubapitest.helper.extensions.extrasBundle
-import com.example.githubapitest.helper.extensions.loadColorBackGround
-import com.example.githubapitest.helper.extensions.loadFromUrl
-import com.example.githubapitest.helper.extensions.observe
+import com.example.githubapitest.helper.extensions.*
 import com.example.githubapitest.model.Repos
 import com.example.githubapitest.model.ViewEvents
 import com.example.githubapitest.viewmodel.DetailsViewModel
@@ -38,15 +34,20 @@ class DetailsActivity : AppCompatActivity() {
     private fun setupSaveRepo() {
         applyFilters.setOnClickListener {
             viewmodel.saveRepoToFav(repos)
-        }
+        }.also { viewmodel.verifyDataIsAlreadySaved(repos) }
     }
 
     private fun initObservers() {
         viewmodel.viewState().observe(this) {
             when (it) {
                 is ViewEvents.SavedDataRepo -> changeStateButton()
+                is ViewEvents.CannotSaveDataRepo -> showErrorMessage()
             }
         }
+    }
+
+    private fun showErrorMessage() {
+        toast(getString(R.string.cannot_save_in_favs))
     }
 
     private fun changeStateButton() {

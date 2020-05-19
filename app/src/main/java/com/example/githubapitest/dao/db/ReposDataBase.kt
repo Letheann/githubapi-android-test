@@ -13,7 +13,7 @@ interface ReposDataBase {
     val all: List<Repos>
 
     @Query("SELECT * FROM repos WHERE id = (:id)")
-    fun loadIconById(id: Int): Repos
+    fun loadRepoById(id: Int): Repos
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(repos: List<Repos>)

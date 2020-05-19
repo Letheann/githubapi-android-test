@@ -45,6 +45,7 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
         forksButton.setOnClickListener(this)
         updatedButton.setOnClickListener(this)
         applyFilters.setOnClickListener(this)
+        favsButton.setOnClickListener(this)
     }
 
     private fun populateLayoutByFilter(filters: FilterParameters?) {
@@ -54,19 +55,27 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
                     updateColors(forksButton, R.color.Black, R.color.White, true)
                     updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
                     updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
+                    updateColors(favsButton, R.color.GrayBackground, R.color.Black, false)
                 }
                 UPDATED -> {
                     updateColors(updatedButton, R.color.Black, R.color.White, true)
                     updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                     updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
+                    updateColors(favsButton, R.color.GrayBackground, R.color.Black, false)
                 }
 
                 STARS -> {
                     updateColors(starsButton, R.color.Black, R.color.White, true)
                     updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                     updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
+                    updateColors(favsButton, R.color.GrayBackground, R.color.Black, false)
                 }
             }
+        } else if (filters != null && filters.favorites) {
+            updateColors(favsButton, R.color.Black, R.color.White, true)
+            updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
+            updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
+            updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
         }
 
         if (filters?.order != null && filters.order != "") {
@@ -110,19 +119,29 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
                 updateColors(forksButton, R.color.Black, R.color.White, true)
                 updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.sort = FORKS
+                updateColors(favsButton, R.color.GrayBackground, R.color.Black, false)
+                updateFilters(false , FORKS)
             }
             R.id.updatedButton -> {
                 updateColors(updatedButton, R.color.Black, R.color.White, true)
                 updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.sort = UPDATED
+                updateColors(favsButton, R.color.GrayBackground, R.color.Black, false)
+                updateFilters(false , UPDATED)
             }
             R.id.starsButton -> {
                 updateColors(starsButton, R.color.Black, R.color.White, true)
                 updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
                 updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
-                filters?.sort = STARS
+                updateColors(favsButton, R.color.GrayBackground, R.color.Black, false)
+                updateFilters(false , STARS)
+            }
+            R.id.favsButton -> {
+                updateColors(favsButton, R.color.Black, R.color.White, true)
+                updateColors(forksButton, R.color.GrayBackground, R.color.Black, false)
+                updateColors(updatedButton, R.color.GrayBackground, R.color.Black, false)
+                updateColors(starsButton, R.color.GrayBackground, R.color.Black, false)
+                updateFilters(true , null)
             }
 
             R.id.applyFilters -> {
@@ -130,6 +149,12 @@ class FilterActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
         }
+    }
+
+
+   private fun updateFilters(fav : Boolean, sort: String?){
+       filters?.sort = sort
+       filters?.favorites = fav
     }
 
     private fun updateColors(

@@ -14,6 +14,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.githubapitest.dao.AppDatabase
 import org.junit.rules.TestRule
 
 
@@ -21,9 +22,11 @@ class MainActivityViewModelTest {
 
     private var repo: GetUsers = mock()
 
+    private var dao: AppDatabase = mock()
+
     private val users: Search = mock()
 
-    private val viewmodel: MainActivityViewModel = MainActivityViewModel(repo)
+    private val viewModel: MainActivityViewModel = MainActivityViewModel(repo, dao)
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -35,13 +38,13 @@ class MainActivityViewModelTest {
 
     @Test
     fun incrementPage() {
-        assertEquals(viewmodel.incrementPage(), "2")
+        assertEquals(viewModel.incrementPage(), "2")
     }
 
     @Test
     fun resetPage() {
-        viewmodel.resetPage()
-        assertEquals(viewmodel.returnPage(), 2)
+        viewModel.resetPage()
+        assertEquals(viewModel.returnPage(), 2)
     }
 
     @ExperimentalCoroutinesApi
@@ -50,12 +53,14 @@ class MainActivityViewModelTest {
 
         whenever(repo.execute(any(), any(), any(), any())) doReturn users
 
-        viewmodel.getRepos()
+        viewModel.getRepos()
 
         assertEquals(
-            ViewEvents.SuccessGetUsers(
-                users
-            ), viewmodel.viewState().value
+            users.items?.let {
+                ViewEvents.SuccessGetUsers(
+                    it
+                )
+            }, viewModel.viewState().value
         )
     }
 }
