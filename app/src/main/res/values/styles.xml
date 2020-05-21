@@ -16,9 +16,9 @@
         <item name="strokeWidth">@dimen/dimens1dp</item>
     </style>
 
-    <style name="semiBoldFont" >
+    <style name="muliFont" >
         <item name="android:textColor">@color/Black</item>
-        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:fontFamily">@font/muli_font</item>
 
     </style>
 

@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="@id/constraint">
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/divisor"
             android:layout_width="@dimen/dimens0dp"
             android:layout_height="@dimen/dimens1dp"
             android:layout_marginTop="@dimen/dimens20dp"

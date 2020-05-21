@@ -10,15 +10,15 @@
         android:id="@+id/imageView"
         android:layout_width="@dimen/dimens200dp"
         android:layout_height="@dimen/dimens200dp"
-        android:src="@drawable/ic_square"
+        android:src="@drawable/ic_no_wifi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        style="@style/semiBoldFont"
-        android:id="@+id/textView3"
+        style="@style/muliFont"
+        android:id="@+id/messageConection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -45,7 +45,7 @@
         android:textSize="@dimen/dimens10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/messageConection" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
