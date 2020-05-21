@@ -16,13 +16,9 @@ class DetailsViewModel(private val dao: AppDatabase) : BaseViewModel() {
     fun viewState(): LiveData<ViewEvents> = state
 
     fun saveRepoToFav(repos: Repos?) {
-        try {
-            jobs add launch {
-                repos?.let { dao.reposDataBase().insertItem(it) }
-                state.postValue(ViewEvents.SavedDataRepo())
-            }
-        } catch (e: Exception) {
-            e.toString()
+        jobs add async(Dispatchers.IO) {
+            repos?.let { dao.reposDataBase().insertItem(it) }
+            state.postValue(ViewEvents.SavedDataRepo())
         }
     }
 
