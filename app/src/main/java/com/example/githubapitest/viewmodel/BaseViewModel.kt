@@ -10,8 +10,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel : ViewModel(), CoroutineScope {
-    private val job = SupervisorJob()
-    override val coroutineContext: CoroutineContext = Main + job + IO
+    override val coroutineContext: CoroutineContext = Main
     protected val jobs = ArrayList<Job>()
 
 

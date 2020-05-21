@@ -4,11 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.githubapitest.R
 import com.example.githubapitest.helper.extensions.*
-import com.example.githubapitest.model.Repos
-import com.example.githubapitest.model.ViewEvents
+import com.example.githubapitest.model.users.Repos
+import com.example.githubapitest.model.events.ViewEvents
 import com.example.githubapitest.viewmodel.DetailsViewModel
 import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.users_layout.profileImage
 import kotlinx.android.synthetic.main.users_layout.userName
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -51,7 +50,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun changeStateButton() {
-        applyFilters.isEnabled = false
+        applyFilters.disable()
         applyFilters.loadColorBackGround(R.color.Lime)
         applyFilters.text = getString(R.string.save_fav_sucess)
     }

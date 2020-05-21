@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black_issue">
-        
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
+
+
+        <com.example.githubapitest.ui.custom.CustomImageView
+            android:id="@+id/cardImage"
             android:layout_width="@dimen/dimens42dp"
             android:layout_height="@dimen/dimens42dp"
             android:layout_marginStart="@dimen/dimens32dp"
-            android:layout_marginLeft="@dimen/dimens24dp"
             android:layout_marginTop="@dimen/dimens32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,17 +25,16 @@
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profileImage"
+            android:layout_below="@id/cardImage"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/dimens10dp"
-            android:layout_marginLeft="@dimen/dimens10dp"
-            android:text="@string/user_repo"
             android:maxLength="19"
+            android:text="@string/user_repo"
             android:textColor="@color/White"
             android:textSize="@dimen/dimens15sp"
-            app:layout_constraintBottom_toBottomOf="@id/profileImage"
-            app:layout_constraintStart_toEndOf="@id/profileImage"
-            app:layout_constraintTop_toTopOf="@id/profileImage" />
+            app:layout_constraintBottom_toBottomOf="@id/cardImage"
+            app:layout_constraintStart_toEndOf="@id/cardImage"
+            app:layout_constraintTop_toTopOf="@id/cardImage" />
 
         <TextView
             android:id="@+id/starsText"
@@ -44,10 +43,9 @@
             android:layout_below="@id/userName"
             android:layout_centerHorizontal="true"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="@dimen/dimens24dp"
             android:gravity="center"
-            android:textColor="@color/gray"
             android:text="@string/total_of_stars"
+            android:textColor="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/userName" />
 
@@ -67,11 +65,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimens20dp"
+            android:background="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileImage"
-            android:background="#000000">
+            app:layout_constraintTop_toBottomOf="@id/cardImage">
 
             <TextView
                 android:id="@+id/DataText"
@@ -79,7 +77,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimens20dp"
                 android:layout_marginEnd="@dimen/dimens100dp"
-                android:layout_marginRight="@dimen/dimens100dp"
                 android:text="@string/data"
                 android:textColor="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +125,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimens50dp"
-                android:layout_marginLeft="@dimen/dimens50dp"
                 android:layout_marginTop="@dimen/dimens20dp"
                 android:text="@string/followers"
                 android:textColor="#FFFFFF"

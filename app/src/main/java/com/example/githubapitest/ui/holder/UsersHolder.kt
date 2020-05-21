@@ -6,7 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
 import com.example.githubapitest.helper.extensions.loadFromUrl
-import com.example.githubapitest.model.Repos
+import com.example.githubapitest.model.users.Repos
 import kotlinx.android.synthetic.main.users_layout.view.*
 import org.joda.time.DateTime
 import org.joda.time.Days
@@ -30,7 +30,7 @@ class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
                 DateTime(Date())
             ).days.toString()
         )
-        user?.owner?.avatarUrl?.let { itemView.profileImage.loadFromUrl(it) }
+        user?.owner?.avatarUrl?.let { itemView.cardImage.loadFromUrl(it) }
         itemView.cardItem.setOnClickListener {
             clickListener.invoke(user)
         }

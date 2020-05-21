@@ -1,21 +1,24 @@
 package com.example.githubapitest.viewmodel
 
-import com.example.githubapitest.CoroutineTestRule
-import com.example.githubapitest.model.Search
-import com.example.githubapitest.model.ViewEvents
+import com.example.githubapitest.utils.CoroutineTestRule
+import com.example.githubapitest.model.users.Search
+import com.example.githubapitest.model.events.ViewEvents
 import com.example.githubapitest.repository.usecases.GetUsers
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.githubapitest.dao.AppDatabase
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.TestCoroutineScope
+import org.apache.tools.ant.taskdefs.Execute.launch
+import org.checkerframework.checker.guieffect.qual.UI
 import org.junit.rules.TestRule
+import kotlin.coroutines.CoroutineContext
 
 
 class MainActivityViewModelTest {
@@ -47,7 +50,7 @@ class MainActivityViewModelTest {
         assertEquals(viewModel.returnPage(), 2)
     }
 
-    @ExperimentalCoroutinesApi
+
     @Test
     fun when_call_api_should_return_value() = runBlocking {
 
@@ -64,3 +67,8 @@ class MainActivityViewModelTest {
         )
     }
 }
+
+
+
+
+

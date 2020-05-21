@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.githubapitest.dao.AppDatabase
 import com.example.githubapitest.helper.extensions.add
-import com.example.githubapitest.model.Repos
-import com.example.githubapitest.model.ViewEvents
+import com.example.githubapitest.model.users.Repos
+import com.example.githubapitest.model.events.ViewEvents
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val dao: AppDatabase) : BaseViewModel() {
 
@@ -14,18 +16,18 @@ class DetailsViewModel(private val dao: AppDatabase) : BaseViewModel() {
     fun viewState(): LiveData<ViewEvents> = state
 
     fun saveRepoToFav(repos: Repos?) {
-        jobs add async {
-            try {
+        try {
+            jobs add launch {
                 repos?.let { dao.reposDataBase().insertItem(it) }
                 state.postValue(ViewEvents.SavedDataRepo())
-            } catch (e: Exception) {
-                state.postValue(ViewEvents.CannotSaveDataRepo())
             }
+        } catch (e: Exception) {
+            e.toString()
         }
     }
 
     fun verifyDataIsAlreadySaved(repos: Repos?) {
-        jobs add async {
+        jobs add async(Dispatchers.IO) {
             if (repos?.id?.let { dao.reposDataBase().loadRepoById(it) } != null) {
                 state.postValue(ViewEvents.SavedDataRepo())
             }

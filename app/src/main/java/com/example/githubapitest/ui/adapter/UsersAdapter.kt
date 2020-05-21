@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubapitest.R
-import com.example.githubapitest.model.Repos
+import com.example.githubapitest.model.users.Repos
 import com.example.githubapitest.ui.holder.UsersHolder
 import kotlin.collections.ArrayList
 

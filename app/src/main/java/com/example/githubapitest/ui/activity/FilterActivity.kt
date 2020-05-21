@@ -1,17 +1,13 @@
 package com.example.githubapitest.ui.activity
 
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import com.example.githubapitest.R
 import com.example.githubapitest.helper.extensions.*
-import com.example.githubapitest.model.FilterParameters
+import com.example.githubapitest.model.users.FilterParameters
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.activity_details.toolbar
 import kotlinx.android.synthetic.main.activity_filter.*

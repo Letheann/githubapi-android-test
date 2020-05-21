@@ -1,4 +1,6 @@
-package com.example.githubapitest.model
+package com.example.githubapitest.model.events
+
+import com.example.githubapitest.model.users.Repos
 
 open class ViewEvents {
     data class SuccessGetUsers(val users: List<Repos>) : ViewEvents()

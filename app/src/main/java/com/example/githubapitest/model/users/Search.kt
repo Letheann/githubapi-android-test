@@ -1,5 +1,6 @@
-package com.example.githubapitest.model
+package com.example.githubapitest.model.users
 
+import com.example.githubapitest.model.users.Repos
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 

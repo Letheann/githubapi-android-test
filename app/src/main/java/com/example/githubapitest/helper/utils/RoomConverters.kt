@@ -2,9 +2,9 @@ package com.example.githubapitest.helper.utils
 
 import androidx.room.TypeConverter
 import com.example.githubapitest.helper.extensions.stringToData
-import com.example.githubapitest.model.License
-import com.example.githubapitest.model.Owner
-import com.example.githubapitest.model.Permissions
+import com.example.githubapitest.model.users.License
+import com.example.githubapitest.model.users.Owner
+import com.example.githubapitest.model.users.Permissions
 import com.google.gson.Gson
 
 object RoomConverters {

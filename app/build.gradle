@@ -12,7 +12,7 @@ android {
     defaultConfig {
         multiDexEnabled true
         applicationId "com.example.githubapitest"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -48,7 +48,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0-beta01'
+    implementation 'androidx.appcompat:appcompat:1.3.0-alpha01'
 
     // koin
     implementation "org.koin:koin-android-architecture:0.9.3"
@@ -65,8 +65,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
 
-    // glide circular
-    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    // glide
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
     //joda time
@@ -80,5 +79,5 @@ dependencies {
     implementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     testImplementation 'org.mockito:mockito-inline:2.21.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }

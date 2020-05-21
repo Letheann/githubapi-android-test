@@ -1,7 +1,7 @@
 package com.example.githubapitest.repository.usecases
 
 import com.example.githubapitest.helper.extensions.safeRequestCheckingNetwork
-import com.example.githubapitest.model.Search
+import com.example.githubapitest.model.users.Search
 import com.example.githubapitest.repository.RetrofitBuilder
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext

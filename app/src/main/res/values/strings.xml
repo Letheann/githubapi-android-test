@@ -19,6 +19,7 @@
     <string name="updatedbutton">Updated</string>
     <string name="apply_filters">Aplicar Filtros</string>
     <string name="save_fav">Salvar em favoritos</string>
+    <string name="try_again">Tente novamente!</string>
     <string name="save_fav_sucess">Salvo com sucesso!</string>
     <string name="details">Detalhes</string>
     <string name="filters">Filtros</string>
@@ -26,4 +27,5 @@
     <string name="repositories">Repositórios</string>
     <string name="search_by_name">Pesquisar por nome?</string>
     <string name="cannot_save_in_favs">não foi possível salvar em favoritos</string>
+    <string name="no_conection_error">ops, parece que você está sem internet!</string>
 </resources>

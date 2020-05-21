@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 
 fun RecyclerView.onScrollStateChange(action: () -> Unit, disableListener: Boolean = false) {
@@ -69,5 +72,20 @@ fun SwipeRefreshLayout.refreshing() {
 
 fun SwipeRefreshLayout.notRefreshing() {
     this.isRefreshing = false
+}
+
+fun View.enable() {
+    this.isEnabled = true
+}
+fun View.disable() {
+    this.isEnabled = false
+}
+
+ fun View.hide() {
+    this.visibility = View.GONE
+}
+
+fun View.show() {
+    this.visibility = View.VISIBLE
 }
 

@@ -1,4 +1,4 @@
-package com.example.githubapitest
+package com.example.githubapitest.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,9 +1,9 @@
-package com.example.githubapitest.viewmodel
+package com.example.githubapitest.activity
 
 import android.content.Intent
 import androidx.test.InstrumentationRegistry
 import com.example.githubapitest.helper.extensions.extras
-import com.example.githubapitest.model.FilterParameters
+import com.example.githubapitest.model.users.FilterParameters
 import com.example.githubapitest.ui.activity.FilterActivity
 import junit.framework.Assert
 import org.junit.Test
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class FilterViewModelTest {
+class FilterActivityTest {
     @Test
     fun assertIntent() {
         val targetContext = InstrumentationRegistry.getInstrumentation().targetContext

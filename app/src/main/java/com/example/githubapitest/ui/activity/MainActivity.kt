@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.githubapitest.R
 import com.example.githubapitest.helper.extensions.*
-import com.example.githubapitest.model.FilterParameters
-import com.example.githubapitest.model.Repos
-import com.example.githubapitest.model.ViewEvents
+import com.example.githubapitest.model.users.FilterParameters
+import com.example.githubapitest.model.users.Repos
+import com.example.githubapitest.model.events.ViewEvents
 import com.example.githubapitest.ui.adapter.UsersAdapter
 import com.example.githubapitest.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.error_placeholder.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         UsersAdapter(this, ::actionClickListener)
     }
     private val viewModel by viewModel<MainActivityViewModel>()
-    private var filters = FilterParameters()
+    private var filters =
+        FilterParameters()
     private val list = ArrayList<Repos>()
     private val layoutManager = GridLayoutManager(this, 1)
 
@@ -107,8 +109,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showErrorRequest() {
-        toast("Erro de request")
         swipeRefresh.notRefreshing()
+        swipeRefresh.hide()
+        includeError.show()
+        includeError.try_again.setOnClickListener {
+            getUsers()
+        }.also { includeError.try_again.enable() }
     }
 
     private fun getUsers() {
@@ -145,6 +151,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun populateData(Repos: List<Repos>?) {
+        includeError.hide()
+        swipeRefresh.show()
+        includeError.try_again.disable()
         if (swipeRefresh.isRefreshing) {
             swipeRefresh.notRefreshing()
         }
@@ -215,3 +224,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+

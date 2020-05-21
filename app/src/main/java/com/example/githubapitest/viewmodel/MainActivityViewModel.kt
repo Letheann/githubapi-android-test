@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.githubapitest.dao.AppDatabase
 import com.example.githubapitest.helper.extensions.add
-import com.example.githubapitest.model.ViewEvents
+import com.example.githubapitest.model.events.ViewEvents
 import com.example.githubapitest.repository.usecases.GetUsers
 import com.example.githubapitest.ui.activity.FilterActivity
 import com.example.githubapitest.ui.activity.MainActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -34,7 +35,6 @@ class MainActivityViewModel(private val repo: GetUsers, private val dao: AppData
         }
     }
 
-
     fun incrementPage(): String {
         return (page++).toString()
     }
@@ -45,9 +45,8 @@ class MainActivityViewModel(private val repo: GetUsers, private val dao: AppData
 
     fun returnPage(): Int = page
 
-
     fun loadItemsFromFav(order: String = FilterActivity.DESC) {
-        jobs add async {
+        jobs add async(Dispatchers.IO) {
             state.postValue(ViewEvents.SuccessGetUsers(if (order == FilterActivity.ASC) dao.reposDataBase().all else dao.reposDataBase().all.reversed()))
         }
     }

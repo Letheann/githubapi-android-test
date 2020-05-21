@@ -58,11 +58,23 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
+    <include
+        android:id="@+id/includeError"
+        layout="@layout/error_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimens0dp"
+        android:layout_marginTop="@dimen/dimens30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInput"
+        android:visibility="gone"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="@dimen/dimens0dp"
+        android:layout_marginTop="@dimen/dimens10dp"
         android:background="@color/GrayBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

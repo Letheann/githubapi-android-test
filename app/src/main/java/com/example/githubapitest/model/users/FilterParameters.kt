@@ -1,4 +1,4 @@
-package com.example.githubapitest.model
+package com.example.githubapitest.model.users
 
 import java.io.Serializable
 
