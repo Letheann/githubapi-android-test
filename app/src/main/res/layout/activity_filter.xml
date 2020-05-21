@@ -7,7 +7,6 @@
     android:background="@color/GrayBackground"
     tools:context=".ui.activity.MainActivity">
 
-
     <TextView
         android:id="@+id/order"
         android:layout_width="wrap_content"
@@ -99,7 +98,6 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
         app:layout_constraintEnd_toStartOf="@+id/forksButton"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filters" />
@@ -117,7 +115,6 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
         app:layout_constraintEnd_toStartOf="@+id/updatedButton"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/favsButton" />
@@ -134,8 +131,6 @@
         android:text="@string/forks"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/favsButton"
         app:layout_constraintTop_toTopOf="@+id/favsButton" />
 
@@ -151,8 +146,6 @@
         android:text="@string/updatedbutton"
         android:textColor="@android:color/black"
         android:textSize="@dimen/dimens10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/starsButton"
         app:layout_constraintTop_toBottomOf="@+id/forksButton" />
 
@@ -179,7 +172,7 @@
         android:layout_width="@dimen/dimens0dp"
         android:layout_height="@dimen/dimens1dp"
         android:layout_marginTop="@dimen/dimens20dp"
-        android:background="#D9DBDF"
+        android:background="@color/color_gray_kind"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/updatedButton" />

@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DetailsActivity : AppCompatActivity() {
 
     private var repos: Repos? = null
-    private val viewmodel by viewModel<DetailsViewModel>()
+    private val viewModel by viewModel<DetailsViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -32,12 +32,12 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun setupSaveRepo() {
         applyFilters.setOnClickListener {
-            viewmodel.saveRepoToFav(repos)
-        }.also { viewmodel.verifyDataIsAlreadySaved(repos) }
+            viewModel.saveRepoToFav(repos)
+        }.also { viewModel.verifyDataIsAlreadySaved(repos) }
     }
 
     private fun initObservers() {
-        viewmodel.viewState().observe(this) {
+        viewModel.viewState().observe(this) {
             when (it) {
                 is ViewEvents.SavedDataRepo -> changeStateButton()
                 is ViewEvents.CannotSaveDataRepo -> showErrorMessage()

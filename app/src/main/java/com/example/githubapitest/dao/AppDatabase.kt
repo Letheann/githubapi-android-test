@@ -6,10 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.githubapitest.MainApplication
 import com.example.githubapitest.dao.db.ReposDataBase
 import com.example.githubapitest.helper.utils.RoomConverters
-
 import com.example.githubapitest.model.users.Repos
 
 @Database(entities = [Repos::class], version = 2, exportSchema = false)

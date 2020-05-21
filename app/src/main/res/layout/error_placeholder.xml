@@ -13,7 +13,8 @@
         android:src="@drawable/ic_no_wifi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAccessibility="no"/>
 
 
     <TextView
@@ -45,7 +46,7 @@
         android:textSize="@dimen/dimens10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageConection" />
+        app:layout_constraintTop_toBottomOf="@id/messageConection" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

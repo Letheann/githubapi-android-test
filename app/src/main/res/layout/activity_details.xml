@@ -51,7 +51,7 @@
             android:layout_width="@dimen/dimens0dp"
             android:layout_height="@dimen/dimens1dp"
             android:layout_marginTop="@dimen/dimens20dp"
-            android:background="#D9DBDF"
+            android:background="@color/color_gray_kind"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/openIssuesValue" />
@@ -210,7 +210,7 @@
             android:layout_width="@dimen/dimens0dp"
             android:layout_height="@dimen/dimens1dp"
             android:layout_marginTop="@dimen/dimens20dp"
-            android:background="#D9DBDF"
+            android:background="@color/color_gray_kind"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileImage" />

@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.githubapitest.dao.AppDatabase
 import com.example.githubapitest.helper.extensions.add
-import com.example.githubapitest.model.users.Repos
 import com.example.githubapitest.model.events.ViewEvents
+import com.example.githubapitest.model.users.Repos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val dao: AppDatabase) : BaseViewModel() {
 

@@ -15,6 +15,4 @@ open class GetUsers {
     ): Search? = withContext(IO) {
         RetrofitBuilder().service.getReposList(q, page, sort, order).safeRequestCheckingNetwork()
     }
-
-
 }

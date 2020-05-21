@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val adater by lazy {
+    private val usersAdapter by lazy {
         UsersAdapter(this, ::actionClickListener)
     }
     private val viewModel by viewModel<MainActivityViewModel>()
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adater
+        recyclerView.adapter = usersAdapter
     }
 
     private fun load() {
@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
             swipeRefresh.notRefreshing()
         }
         Repos?.let { list.addAll(it) }
-        adater.setItem(list)
+        usersAdapter.setItem(list)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
